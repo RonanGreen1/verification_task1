@@ -100,41 +100,41 @@ public class Rate {
     }
 
     // Helper method to apply reductions based on CarParkKind
-private BigDecimal applyReduction(BigDecimal totalCost, CarParkKind kind) {
-    switch (kind) {
-        case VISITOR -> {
-            if (totalCost.compareTo(BigDecimal.TEN) <= 0) {
-                return BigDecimal.ZERO;
-            }
-            return (totalCost.subtract(BigDecimal.TEN)).multiply(BigDecimal.valueOf(0.5));
-            }
+    private BigDecimal applyReduction(BigDecimal totalCost, CarParkKind kind) {
+        switch (kind) {
+            case VISITOR -> {
+                if (totalCost.compareTo(BigDecimal.TEN) <= 0) {
+                    return BigDecimal.ZERO;
+                }
+                return (totalCost.subtract(BigDecimal.TEN)).multiply(BigDecimal.valueOf(0.5));
+                }
 
-        case MANAGEMENT -> {
-            if (totalCost.compareTo(BigDecimal.valueOf(4.00)) < 0) {
-                return BigDecimal.valueOf(4.00);
-            } else {
-                return totalCost;
-            }
-            }
+            case MANAGEMENT -> {
+                if (totalCost.compareTo(BigDecimal.valueOf(4.00)) < 0) {
+                    return BigDecimal.valueOf(4.00);
+                } else {
+                    return totalCost;
+                }
+                }
 
-        case STUDENT -> {
-            if (totalCost.compareTo(BigDecimal.valueOf(5.50)) <= 0) {
-                return totalCost;
-            }
-            BigDecimal aboveThreshold = totalCost.subtract(BigDecimal.valueOf(5.50));
-            return aboveThreshold.multiply(BigDecimal.valueOf(0.75)).add(BigDecimal.valueOf(5.50));
-            }
+            case STUDENT -> {
+                if (totalCost.compareTo(BigDecimal.valueOf(5.50)) <= 0) {
+                    return totalCost;
+                }
+                BigDecimal aboveThreshold = totalCost.subtract(BigDecimal.valueOf(5.50));
+                return aboveThreshold.multiply(BigDecimal.valueOf(0.75)).add(BigDecimal.valueOf(5.50));
+                }
 
-        case STAFF -> {
-            if (totalCost.compareTo(BigDecimal.valueOf(16.00)) > 0) {
-                return BigDecimal.valueOf(16.00);
-            } else {
-                return totalCost;
-            }
-            }
+            case STAFF -> {
+                if (totalCost.compareTo(BigDecimal.valueOf(16.00)) > 0) {
+                    return BigDecimal.valueOf(16.00);
+                } else {
+                    return totalCost;
+                }
+                }
 
-        default -> throw new IllegalArgumentException("Unknown CarParkKind");
+            default -> throw new IllegalArgumentException("Unknown CarParkKind");
+        }
     }
-}
 
 }
