@@ -1,6 +1,7 @@
 package cm;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +103,10 @@ public class Rate {
                 .add(this.hourlyReducedRate.multiply(BigDecimal.valueOf(reducedRateHours)));
     
         // Apply reductions based on CarParkKind
-        return applyReduction(totalCost, this.kind);
+        BigDecimal reducedCost = applyReduction(totalCost, this.kind);
+
+        // Round the result to the nearest cent
+        return reducedCost.setScale(2, RoundingMode.HALF_UP);
     }
 
     // Helper method to apply reductions based on CarParkKind
